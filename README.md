@@ -1,7 +1,7 @@
 ### AutoEQ for handmade speaker
 
 Anyhow I have a handmade speaker with a custom laser print on it - My Little Pony speaker, if you will. This is sound-improvement project for it.
-It has a very, very, very sound emitter and a Bluetooth-enabled controller - joined in an unholy ensemble.
+It has a very, very, very bad sound emitter and a Bluetooth-enabled controller - joined in an unholy ensemble.
 Why not make it slightly less bad?
 
 See wiki for results 2024-08-25.
