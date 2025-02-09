@@ -38,12 +38,13 @@ if __name__ == '__main__':
     curves = input('Enter your curves, use /// as a delimiter: ').split('///')
     curves = [load_curve(c) for c in curves]
     interpolated_curves = [interpolate_curve(c, sp) for c in curves]
-    final_curve = [sum([interpolated_curves[i][u] for i in range(len(curves))]) for u in range(len(curves[0]))]
+    final_curve = [sum([interpolated_curves[i][u] for i in range(len(interpolated_curves))]) for u in range(len(interpolated_curves[0]))]
     ra = 6.0 - max(final_curve)
     final_curve = [x + ra for x in final_curve]
 
+    assert len(final_curve) == len(sp)
     eq_points = []
     for i in range(len(sp)):
         eq_points.append(f"{sp[i]} {final_curve[i]:.1f}")
     print("GraphicEQ: " + "; ".join(eq_points))
-    print("This aint' perfect, but your ears aren't likely to notice any difference")
+    print("This aint' perfect, but your ears aren't likely to notice any differences")
