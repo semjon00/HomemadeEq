@@ -2,9 +2,20 @@ import math
 
 
 def load_curve(c):
-    hz = c.lstrip('GraphicEQ: ').split(';')
-    hz = [(float(x.strip().split(' ')[0]), float(x.strip().split(' ')[1])) for x in hz]
-    return hz
+    if 'GraphicEQ' in c:
+        hz = c.lstrip('GraphicEQ: ').split(';')
+        hz = [(float(x.strip().split(' ')[0]), float(x.strip().split(' ')[1])) for x in hz]
+        return hz
+    else:
+        lines = c.strip().split('\n')
+        result = []
+        for line in lines:
+            if line.startswith('Filter'):
+                parts = line.split()
+                freq = float(parts[5])
+                gain = float(parts[8])
+                result.append((freq, gain))
+        return result
 
 
 def wavelet_special_points():
@@ -33,7 +44,14 @@ def interpolate_curve(curve, target_frequencies): # tnx DeepSeek
 
 if __name__ == '__main__':
     sp = wavelet_special_points()
-    curves = input('Enter your curves, use /// as a delimiter: ').split('///')
+    print('Enter your curves, use /// as delimiter, empty string as stopper: ')
+    curves = ''
+    inn = None
+    while inn != '':
+        inn = input()
+        curves += inn + '\n'
+    curves = curves.rstrip('\n').split('///')
+
     curves = [load_curve(c) for c in curves]
     interpolated_curves = [interpolate_curve(c, sp) for c in curves]
     final_curve = [sum([interpolated_curves[i][u] for i in range(len(interpolated_curves))]) for u in range(len(interpolated_curves[0]))]
